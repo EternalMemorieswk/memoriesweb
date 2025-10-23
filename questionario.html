@@ -509,22 +509,23 @@ $('finalize-btn').addEventListener('click', async ()=>{
 const uploadWidget = uploadcare.Widget('[role=uploadcare-uploader]');
 let uploadedImageLinks = [];
 
-uploadWidget.onChange(function(fileGroup) {
+uploadWidget.onChange(async (fileGroup) => {
   if (!fileGroup) return;
 
-  // `fileGroup` pode ser um grupo ou um único arquivo
-  fileGroup.promise().then(async (group) => {
-    if (group.files()) {
-      // resolve todas as promessas dos arquivos do grupo
-      const results = await Promise.all(group.files().map(f => f.promise()));
-      uploadedImageLinks = results.map(r => r.cdnUrl);
-      atualizarPreviewImagens(uploadedImageLinks);
-    } else if (group.cdnUrl) {
-      // caso seja um único arquivo
-      uploadedImageLinks = [group.cdnUrl];
-      atualizarPreviewImagens(uploadedImageLinks);
-    }
-  });
+  // Se for um grupo (vários arquivos)
+  if (fileGroup.files && typeof fileGroup.files === "function") {
+    const files = await Promise.all(fileGroup.files().map(f => f.promise()));
+    uploadedImageLinks = files.map(f => f.cdnUrl);
+  } 
+  // Se for apenas um arquivo
+  else if (fileGroup.promise) {
+    const file = await fileGroup.promise();
+    uploadedImageLinks = [file.cdnUrl];
+  } else {
+    uploadedImageLinks = [];
+  }
+
+  atualizarPreviewImagens(uploadedImageLinks);
 });
 
 function atualizarPreviewImagens(lista) {
@@ -558,4 +559,5 @@ function iniciarCarrosselPreview() {
 </script>
 </body>
 </html>
+
 
