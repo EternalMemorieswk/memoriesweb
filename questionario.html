@@ -126,7 +126,7 @@
     data-multiple-max="7"
     data-preview-step="true"
   />
-  <div class="hint">Máximo 7 imagens (enviadas automaticamente para a nuvem).</div>
+  <div class="hint">Máximo 7 imagens.</div>
 </div>
           <div>
             <label>Escolha o plano</label>
@@ -141,7 +141,7 @@
           </div>
 
           <div class="full" style="display:flex;justify-content:space-between;align-items:center;margin-top:8px;">
-            <div><div class="muted">Os dados serão enviados ao e-mail da Eternal Memories e você será redirecionado ao pagamento.</div></div>
+            <div><div class="muted">Após o pagamento você receberá o link de acordo com seu plano no seu email e whatsapp.</div></div>
             <div class="row-actions">
               <button id="finalize-btn" type="button" class="finalize-btn">Finalizar Memória</button>
             </div>
@@ -150,7 +150,7 @@
       </div>
 
       <div style="margin-top:12px;color:#a9a9a9;font-size:13px">
-        <strong>Importante:</strong> o HTML final será enviado para <em>eternalmemorieswk@gmail.com</em>.
+        <strong>Importante:</strong> A memória final será enviada por <em>eternalmemorieswk@gmail.com</em>.
       </div>
     </div>
 
@@ -186,7 +186,7 @@
             </div>
           </div>
         </div>
-        <div style="margin-top:10px;text-align:center;color:#a9a9a9;font-size:13px;">Versão Mobile — prévia da memória final</div>
+        <div style="margin-top:10px;text-align:center;color:#a9a9a9;font-size:13px;">Versão Mobile-prévia da memória final</div>
       </div>
     </div>
   </div>
@@ -485,7 +485,7 @@ $('finalize-btn').addEventListener('click', async ()=>{
     alert('Memória enviada com sucesso! Você será redirecionado para o pagamento.');
     // open payment link based on plan in new tab
     const link = data.plan === 'premium' ? paymentLinks.premium : paymentLinks.classico;
-    window.open(link, '_blank');
+    window.location.href = link;
     // store finalHTML locally
     localStorage.setItem('lastMemoryHTML', finalHTML);
     // reset
@@ -559,5 +559,3 @@ function iniciarCarrosselPreview() {
 </script>
 </body>
 </html>
-
-
