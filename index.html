@@ -86,11 +86,24 @@
 <body>
 
   <!-- Header -->
- <header class="bg-black sticky top-0 z-40 border-b border-[#111]">
-  <div class="max-w-7xl mx-auto px-4 py-4 flex flex-col sm:flex-row items-center sm:justify-between gap-3 sm:gap-0 text-center">
-    <div class="text-2xl font-extrabold text-gradient">Eternal Memories</div>
+<header class="bg-black sticky top-0 z-40 border-b border-[#111]">
+  <div class="max-w-7xl mx-auto px-4 py-4 flex flex-col sm:flex-row items-center sm:justify-between gap-4 sm:gap-0">
+    
+    <!-- Logo + Título -->
+    <div class="flex items-center gap-3 text-center sm:text-left">
+      <!-- LOGO -->
+      <img src="logoeternal.png" alt="Logo Eternal Memories" class="w-12 h-12 rounded-full shadow-[0_0_15px_rgba(255,105,180,0.4)]">
+
+      <!-- Título e Subtítulo -->
+      <div class="flex flex-col leading-tight">
+        <div class="text-2xl font-extrabold text-gradient">Eternal Memories</div>
+        <div class="text-sm text-rose-300 opacity-90 tracking-wide">Memórias que vivem para sempre</div>
+      </div>
+    </div>
+
+    <!-- Botão CTA -->
     <a href="questionario.html"
-       class="px-6 py-2 rounded-full bg-rose-600 hover:bg-rose-500 text-white font-semibold w-full sm:w-auto">
+       class="px-6 py-2 rounded-full bg-rose-600 hover:bg-rose-500 text-white font-semibold w-full sm:w-auto transition">
        Crie Sua Memória
     </a>
   </div>
@@ -102,6 +115,80 @@
       <h2 class="text-3xl md:text-4xl font-extrabold text-gradient mb-4">Transforme Seus Momentos em Memórias Eternas</h2>
       <p class="text-gray-300 mb-6">Crie e compartilhe momentos inesquecíveis com quem você ama. Personalize sua memória, adicione fotos, cartas e músicas para tornar cada instante único.</p>
     </section>
+    <!-- Seção: Como Funciona -->
+<section class="w-full bg-black py-20 px-6 text-center">
+  <div class="max-w-5xl mx-auto">
+    <h2 class="text-4xl font-bold text-white mb-6">Como Funciona?</h2>
+    <p class="text-lg text-gray-300 mb-12 leading-relaxed">
+      Surpreenda alguém especial com uma lembrança digital que faz o coração bater mais forte.<br>
+      É fácil, rápido e inesquecível.
+    </p>
+
+    <div class="grid sm:grid-cols-2 gap-10">
+      
+      <!-- Passo 1 -->
+      <div class="relative rounded-2xl p-6 border border-pink-500/50 bg-black/40 backdrop-blur-sm shadow-[0_0_15px_2px_rgba(255,105,180,0.25)] hover:shadow-[0_0_25px_4px_rgba(255,105,180,0.45)] transition-all">
+        <div class="flex items-start gap-4">
+          <div class="bg-pink-500 text-white text-lg font-bold w-10 h-10 flex items-center justify-center rounded-full shadow-lg flex-shrink-0">1</div>
+          <div>
+            <h3 class="text-xl font-semibold text-white mb-1">Preencha os Campos</h3>
+            <p class="text-gray-400">
+              Adicione nomes, a história de vocês, até 7 fotos especiais e a música que marcou o relacionamento.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Passo 2 -->
+      <div class="relative rounded-2xl p-6 border border-pink-500/50 bg-black/40 backdrop-blur-sm shadow-[0_0_15px_2px_rgba(255,105,180,0.25)] hover:shadow-[0_0_25px_4px_rgba(255,105,180,0.45)] transition-all">
+        <div class="flex items-start gap-4">
+          <div class="bg-pink-500 text-white text-lg font-bold w-10 h-10 flex items-center justify-center rounded-full shadow-lg flex-shrink-0">2</div>
+          <div>
+            <h3 class="text-xl font-semibold text-white mb-1">Pagamento</h3>
+            <p class="text-gray-400">
+              Finalize a compra do plano escolhido de forma rápida e segura para ativar sua memória.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Passo 3 -->
+      <div class="relative rounded-2xl p-6 border border-pink-500/50 bg-black/40 backdrop-blur-sm shadow-[0_0_15px_2px_rgba(255,105,180,0.25)] hover:shadow-[0_0_25px_4px_rgba(255,105,180,0.45)] transition-all">
+        <div class="flex items-start gap-4">
+          <div class="bg-pink-500 text-white text-lg font-bold w-10 h-10 flex items-center justify-center rounded-full shadow-lg flex-shrink-0">3</div>
+          <div>
+            <h3 class="text-xl font-semibold text-white mb-1">QR Code e Link</h3>
+            <p class="text-gray-400">
+              Receba o Link Único e o QR Code personalizado da sua memória romântica.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Passo 4 -->
+      <div class="relative rounded-2xl p-6 border border-pink-500/50 bg-black/40 backdrop-blur-sm shadow-[0_0_15px_2px_rgba(255,105,180,0.25)] hover:shadow-[0_0_25px_4px_rgba(255,105,180,0.45)] transition-all">
+        <div class="flex items-start gap-4">
+          <div class="bg-pink-500 text-white text-lg font-bold w-10 h-10 flex items-center justify-center rounded-full shadow-lg flex-shrink-0">4</div>
+          <div>
+            <h3 class="text-xl font-semibold text-white mb-1">Compartilhe a Memória</h3>
+            <p class="text-gray-400">
+              Envie o link ou o QR Code para a pessoa amada e emocione-a instantaneamente!
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Botão -->
+    <div class="mt-14">
+      <a href="questionario.html"
+         class="inline-block bg-gradient-to-r from-pink-500 via-rose-500 to-pink-400 text-white text-lg font-semibold py-3 px-12 rounded-full shadow-[0_0_20px_rgba(255,105,180,0.5)] hover:shadow-[0_0_35px_rgba(255,105,180,0.8)] hover:scale-105 transition-transform">
+         COMEÇE AGORA!!
+      </a>
+    </div>
+  </div>
+</section>
+
 
     <!-- Estatísticas -->
     <section class="max-w-6xl mx-auto px-6 mb-16 text-center">
@@ -268,8 +355,6 @@
 
   </main>
 
-  <footer class="text-center text-gray-400 py-8">© 2025 Eternal Memories — Prévia Romântica de João & Maria</footer>
-
   <!-- Scripts -->
   <script>
     const startDate = new Date('2020-06-20T18:30:00');
@@ -352,6 +437,139 @@
     updateCountdown('countdown-classic'); 
     updateCountdown('countdown-premium');
   </script>
+    <!-- Botões Flutuantes com Tooltips e Animação -->
+  <style>
+    @keyframes slideUp {
+      from { transform: translateY(20px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+    .float-btn {
+      animation: slideUp 0.6s ease forwards;
+    }
+    .tooltip {
+      position: absolute;
+      right: 4.5rem;
+      opacity: 0;
+      transform: translateX(5px);
+      transition: all 0.25s ease;
+      pointer-events: none;
+    }
+    .group:hover .tooltip {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  </style>
+
+  <div class="fixed bottom-8 right-8 flex flex-col gap-3 z-50">
+
+    <!-- WhatsApp -->
+    <div class="group relative flex items-center justify-end float-btn" style="animation-delay:0.1s">
+      <div class="tooltip bg-green-500/90 text-white text-sm font-medium py-1.5 px-3 rounded-full shadow-lg whitespace-nowrap">
+        Fale conosco 💬
+      </div>
+      <a href="https://wa.me/5582993734514?text=Olá!%20Gostaria%20de%20tirar%20uma%20dúvida%20sobre%20a%20Eternal%20Memories."
+         target="_blank"
+         class="bg-green-500 hover:bg-green-400 text-white w-14 h-14 rounded-full flex items-center justify-center shadow-lg transition-transform transform hover:scale-110">
+        <!-- Ícone WhatsApp -->
+        <svg viewBox="0 0 32 32" width="28" height="28" fill="white" xmlns="http://www.w3.org/2000/svg">
+          <path d="M16.001 2.666c-7.364 0-13.334 5.97-13.334 13.334 0 2.351.612 4.649 1.776 6.67L3.333 29.334l6.854-1.79a13.3 13.3 0 0 0 5.814 1.357h.001c7.364 0 13.334-5.97 13.334-13.334s-5.97-13.334-13.334-13.334zm0 24.001c-1.85 0-3.657-.473-5.26-1.373l-.377-.211-4.073 1.063 1.089-3.972-.245-.389a10.658 10.658 0 0 1-1.645-5.585c0-5.895 4.801-10.667 10.667-10.667S26.668 10.334 26.668 16.23c0 5.866-4.802 10.437-10.667 10.437zm5.438-7.804c-.297-.149-1.757-.867-2.029-.967-.272-.099-.471-.148-.67.149-.197.297-.769.967-.943 1.165-.173.198-.347.223-.644.074-.297-.149-1.254-.462-2.39-1.476-.883-.787-1.48-1.758-1.652-2.056-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.52.149-.173.198-.297.297-.495.099-.198.05-.372-.025-.52-.075-.149-.67-1.624-.918-2.238-.242-.583-.488-.505-.67-.514l-.57-.009c-.198 0-.52.074-.792.372-.272.297-1.039 1.011-1.039 2.466 0 1.455 1.07 2.86 1.211 3.058.149.198 2.372 3.642 5.729 5.107.802.344 1.428.549 1.915.704.802.255 1.532.234 2.111.142.644-.097 1.984-.808 2.266-1.591.282-.783.282-1.45.197-1.591-.084-.141-.31-.224-.648-.392z"/>
+        </svg>
+      </a>
+    </div>
+
+    <!-- Instagram -->
+    <div class="group relative flex items-center justify-end float-btn" style="animation-delay:0.25s">
+      <div class="tooltip bg-pink-500/90 text-white text-sm font-medium py-1.5 px-3 rounded-full shadow-lg whitespace-nowrap">
+        Veja nosso Instagram 📸
+      </div>
+      <a href="https://instagram.com/eternalmemorieswk"
+         target="_blank"
+         class="bg-gradient-to-tr from-purple-500 via-pink-500 to-yellow-400 text-white w-14 h-14 rounded-full flex items-center justify-center shadow-lg transition-transform transform hover:scale-110">
+        <!-- Ícone Instagram -->
+        <svg viewBox="0 0 24 24" width="26" height="26" fill="white" xmlns="http://www.w3.org/2000/svg">
+          <path d="M7.75 2A5.76 5.76 0 0 0 2 7.75v8.5A5.76 5.76 0 0 0 7.75 22h8.5A5.76 5.76 0 0 0 22 16.25v-8.5A5.76 5.76 0 0 0 16.25 2h-8.5zM12 7.25a4.75 4.75 0 1 1 0 9.5a4.75 4.75 0 0 1 0-9.5zm6.25-.75a1 1 0 1 1 0 2a1 1 0 0 1 0-2zM12 9a3 3 0 1 0 0 6a3 3 0 0 0 0-6z"/>
+        </svg>
+      </a>
+    </div>
+  </div>
+<!-- Seção de Credibilidade -->
+<section class="bg-black py-16 px-6 border-t border-[#111]">
+  <div class="max-w-6xl mx-auto text-center">
+    <h2 class="text-3xl font-extrabold text-gradient mb-10">Por Que Confiar na Eternal Memories?</h2>
+
+    <div class="grid md:grid-cols-3 gap-10">
+      
+      <!-- Segurança -->
+      <div class="p-6 rounded-2xl bg-[#0b0b0b] border border-pink-500/40 shadow-[0_0_15px_rgba(255,105,180,0.25)] hover:shadow-[0_0_25px_rgba(255,105,180,0.45)] transition-all">
+        <div class="flex flex-col items-center gap-4">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-10 h-10 text-pink-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 11c.944 0 1.5.556 1.5 1.5S12.944 14 12 14s-1.5-.556-1.5-1.5S11.056 11 12 11z" />
+            <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 11A7.5 7.5 0 1119 11v5.25a2.25 2.25 0 01-2.25 2.25H6.75A2.25 2.25 0 014.5 16.25V11z" />
+          </svg>
+          <h3 class="text-xl font-semibold text-white">Site 100% Seguro</h3>
+          <p class="text-gray-400 text-sm leading-relaxed">Seus dados são protegidos com criptografia SSL e servidores certificados.</p>
+        </div>
+      </div>
+
+      <!-- Confiabilidade -->
+      <div class="p-6 rounded-2xl bg-[#0b0b0b] border border-pink-500/40 shadow-[0_0_15px_rgba(255,105,180,0.25)] hover:shadow-[0_0_25px_rgba(255,105,180,0.45)] transition-all">
+        <div class="flex flex-col items-center gap-4">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-10 h-10 text-pink-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+          <h3 class="text-xl font-semibold text-white">Confiabilidade Comprovada</h3>
+          <p class="text-gray-400 text-sm leading-relaxed">Mais de 3.500 memórias criadas e milhares de clientes emocionados.</p>
+        </div>
+      </div>
+
+      <!-- Atendimento -->
+      <div class="p-6 rounded-2xl bg-[#0b0b0b] border border-pink-500/40 shadow-[0_0_15px_rgba(255,105,180,0.25)] hover:shadow-[0_0_25px_rgba(255,105,180,0.45)] transition-all">
+        <div class="flex flex-col items-center gap-4">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-10 h-10 text-pink-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M8 10h.01M12 10h.01M16 10h.01M21 16.5a2.5 2.5 0 01-2.5 2.5h-13A2.5 2.5 0 013 16.5V6.5A2.5 2.5 0 015.5 4h13A2.5 2.5 0 0121 6.5v10z" />
+          </svg>
+          <h3 class="text-xl font-semibold text-white">Atendimento Personalizado</h3>
+          <p class="text-gray-400 text-sm leading-relaxed">Estamos disponíveis para tirar dúvidas e ajudar em cada detalhe da sua memória.</p>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Linha extra de confiança -->
+    <div class="mt-12 text-gray-400 text-sm">
+      <p>💖 Eternal Memories é uma plataforma dedicada a transformar momentos em lembranças eternas com segurança, carinho e qualidade.</p>
+      <p class="mt-2">Pagamentos seguros | Suporte via WhatsApp | 98% de satisfação dos usuários</p>
+    </div>
+  </div>
+</section>
+
+<!-- RODAPÉ -->
+<footer class="bg-[#0a0a0a] border-t border-pink-500/30 py-8 px-6">
+  <div class="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4 text-center md:text-left">
+    <div>
+      <h3 class="text-white font-bold text-lg">Eternal Memories</h3>
+      <p class="text-gray-400 text-sm">© 2025 Eternal Memories. Todos os direitos reservados.</p>
+    </div>
+
+    <div class="flex gap-6">
+      <!-- WhatsApp -->
+      <a href="https://wa.me/5582993734514" target="_blank" class="text-pink-400 hover:text-pink-300 transition" aria-label="WhatsApp">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M3 21l1.65-4.95a8.97 8.97 0 111.34 1.34L3 21z" />
+        </svg>
+      </a>
+      <!-- Instagram -->
+      <a href="https://instagram.com/eternalmemorieswk" target="_blank" class="text-pink-400 hover:text-pink-300 transition" aria-label="Instagram">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
+          <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
+          <path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z" />
+          <circle cx="17.5" cy="6.5" r="0.5" />
+        </svg>
+      </a>
+    </div>
+  </div>
+</footer>
+
 </body>
 </html>
 
