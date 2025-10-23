@@ -542,6 +542,55 @@
     </div>
   </div>
 </section>
+ <!-- Seção de Depoimentos -->
+<section class="max-w-6xl mx-auto px-6 mb-20 text-center">
+  <h2 class="text-3xl font-extrabold text-gradient mb-8">O Que Nossos Clientes Dizem 💕</h2>
+  <div class="grid md:grid-cols-3 gap-8">
+    <div class="bg-[#0a0a0a] border border-rose-400/30 rounded-2xl p-6 shadow-lg hover:shadow-rose-500/20 transition">
+      <p class="text-gray-300 italic mb-4">“Eu chorei quando vi minha memória. É simplesmente mágico e inesquecível!”</p>
+      <p class="text-rose-300 font-semibold">Ana, São Paulo</p>
+    </div>
+    <div class="bg-[#0a0a0a] border border-rose-400/30 rounded-2xl p-6 shadow-lg hover:shadow-rose-500/20 transition">
+      <p class="text-gray-300 italic mb-4">“A experiência foi incrível! Tudo muito fácil e o resultado ficou perfeito.”</p>
+      <p class="text-rose-300 font-semibold">Lucas, Recife</p>
+    </div>
+    <div class="bg-[#0a0a0a] border border-rose-400/30 rounded-2xl p-6 shadow-lg hover:shadow-rose-500/20 transition">
+      <p class="text-gray-300 italic mb-4">“Minha namorada ficou emocionada! É um presente que realmente toca o coração.”</p>
+      <p class="text-rose-300 font-semibold">Mariana, Curitiba</p>
+    </div>
+  </div>
+</section>
+<!-- Contador de Memórias Criadas -->
+<section class="max-w-4xl mx-auto px-6 mb-20 text-center">
+  <div class="bg-[#0a0a0a] border border-rose-400/30 rounded-2xl py-8 shadow-lg">
+    <p class="text-gray-300 text-lg mb-2">💌 Emocionando corações todos os dias</p>
+    <p class="text-4xl font-extrabold text-[#ffb6d9]">
+      <span id="contador">0</span> memórias criadas nesta semana.
+    </p>
+  </div>
+</section>
+
+<!-- Script do contador -->
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const contador = document.getElementById("contador");
+    const final = 28; // número que você quer exibir
+    let atual = 0;
+
+    const animar = () => {
+      if (atual < final) {
+        atual++;
+        contador.textContent = atual;
+        requestAnimationFrame(animar);
+      }
+    };
+
+    // delay suave pra começar a animação
+    setTimeout(animar, 500);
+  });
+</script>
+
+
 
 <!-- RODAPÉ -->
 <footer class="bg-[#0a0a0a] border-t border-pink-500/30 py-8 px-6">
@@ -568,6 +617,7 @@
       </a>
     </div>
   </div>
+ 
 </footer>
 
 </body>
