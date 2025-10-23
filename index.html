@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Eternal Memories — Prévia Romântica (João & Maria)</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    :root{
+      --bg:#000;
+      --card:#0a0a0a;
+      --accent:#ff6b9a;
+      --muted:#cfcfcf;
+      font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+    }
+
+    body { background:var(--bg); color:#fff; -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale; }
+    .text-gradient { background-image: linear-gradient(90deg,#f472b6,#f9a8d4); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
+
+    .cta-button { transition: all .25s ease; }
+
+    .phone-3d-container { transform: perspective(1000px) rotateY(-5deg) rotateX(5deg); transition: transform .45s ease; }
+    .phone-3d-container:hover { transform: perspective(1000px) rotateY(0deg) rotateX(0deg); }
+    .laptop-3d-container { transform: perspective(1000px) rotateX(10deg); transition: transform .45s ease; transform-origin: bottom center; }
+    .laptop-3d-container:hover { transform: perspective(1000px) rotateX(0deg); }
+
+    .carousel-image { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; opacity:0; transition:opacity .9s ease-in-out; }
+    .carousel-image.active { opacity:1; }
+
+    .hearts { pointer-events:none; position:absolute; inset:0; overflow:hidden; z-index:25; }
+    .heart {
+      position: absolute;
+      width:18px; height:18px;
+      transform: translateY(-50px) rotate(0deg);
+      opacity:0.9;
+      animation-name: floatUp;
+      animation-timing-function: linear;
+      animation-iteration-count: infinite;
+      color:#ff6b9a;
+      filter: drop-shadow(0 6px 12px rgba(255,0,120,0.08));
+    }
+    @keyframes floatUp {
+      0% { transform: translateY(20vh) scale(.8) rotate(0deg); opacity:0; }
+      10% { opacity:1; }
+      100% { transform: translateY(-120vh) scale(1.2) rotate(360deg); opacity:0; }
+    }
+
+    .preview-overlay { position:absolute; inset:0; z-index:30; display:flex; flex-direction:column; justify-content:space-between; padding:14px; gap:8px; }
+    .preview-top { display:flex; justify-content:space-between; align-items:center; gap:8px; }
+    .preview-title { text-align:center; }
+    .url-pill { background:rgba(255,255,255,0.06); padding:6px 10px; border-radius:999px; font-size:12px; color:var(--muted); letter-spacing:.2px; }
+    .romantic-title { font-weight:800; font-size:20px; color: #ffdfe9; text-shadow:0 6px 18px rgba(255,105,155,0.12); }
+    .counter-pill { background:rgba(255,255,255,0.06); padding:6px 10px; border-radius:12px; font-weight:700; font-size:13px; }
+
+    .letter { background: rgba(0,0,0,0.35); backdrop-filter: blur(4px); padding:10px; border-radius:12px; font-size:13px; line-height:1.25; max-height:130px; overflow:auto; color:#f7ecf1; box-shadow:0 6px 20px rgba(0,0,0,0.6); }
+
+    .music-controls { display:flex; align-items:center; gap:8px; }
+    .play-btn { background: rgba(255,255,255,0.06); padding:10px; width:44px; height:44px; border-radius:12px; display:inline-grid; place-items:center; cursor:pointer; transition: all 0.25s; }
+    .play-btn:hover { transform:translateY(-3px) scale(1.05); }
+
+    .letter::-webkit-scrollbar{height:6px;width:6px}
+    .letter::-webkit-scrollbar-thumb{background:rgba(255,255,255,0.08);border-radius:6px}
+
+    /* Novo estilo para contadores elegantes */
+    #countdown-classic, #countdown-premium {
+      display:inline-block;
+      padding:4px 8px;
+      border-radius:8px;
+      background: rgba(255,255,255,0.08);
+      color:#ff6b9a;
+      font-weight:700;
+      animation: pulse 1s infinite alternate;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); opacity:1; }
+      100% { transform: scale(1.05); opacity:0.85; }
+    }
+
+    @media (max-width:900px){
+      .phone-3d-container { transform: none; }
+      .laptop-3d-container { transform: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="bg-black sticky top-0 z-40 border-b border-[#111]">
+    <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+      <div class="text-2xl font-extrabold text-gradient">Eternal Memories</div>
+      <a href="questionario.html" class="px-5 py-2 rounded-full bg-rose-600 hover:bg-rose-500 text-white font-semibold">Crie Sua Memória</a>
+    </div>
+  </header>
+
+  <main class="pt-12 pb-24">
+    <!-- Texto inicial -->
+    <section class="max-w-4xl mx-auto px-6 text-center mb-12">
+      <h2 class="text-3xl md:text-4xl font-extrabold text-gradient mb-4">Transforme Seus Momentos em Memórias Eternas</h2>
+      <p class="text-gray-300 mb-6">Crie e compartilhe momentos inesquecíveis com quem você ama. Personalize sua memória, adicione fotos, cartas e músicas para tornar cada instante único.</p>
+    </section>
+
+    <!-- Estatísticas -->
+    <section class="max-w-6xl mx-auto px-6 mb-16 text-center">
+      <h3 class="text-2xl font-extrabold text-gradient mb-6">Nossas Estatísticas</h3>
+      <div class="grid md:grid-cols-3 gap-8">
+        <div class="bg-[#111] rounded-2xl p-6 shadow-lg">
+          <p class="text-4xl font-extrabold text-rose-400 mb-2">+12.000</p>
+          <p class="text-gray-300">Pessoas acessaram</p>
+        </div>
+        <div class="bg-[#111] rounded-2xl p-6 shadow-lg">
+          <p class="text-4xl font-extrabold text-rose-400 mb-2">+3.500</p>
+          <p class="text-gray-300">Memórias criadas</p>
+        </div>
+        <div class="bg-[#111] rounded-2xl p-6 shadow-lg">
+          <p class="text-4xl font-extrabold text-rose-400 mb-2">98%</p>
+          <p class="text-gray-300">Satisfação dos usuários</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Prévia Mobile e Desktop -->
+    <section class="max-w-6xl mx-auto px-6 text-center mb-16">
+      <h1 class="text-4xl md:text-5xl font-extrabold mb-6">Inesquecível em <span class="text-rose-400">Qualquer Tela</span></h1>
+      <p class="text-gray-300 mb-8 max-w-2xl mx-auto">Veja uma prévia real de como ficará a memória do casal — João & Maria.</p>
+
+      <div class="flex flex-col lg:flex-row gap-12 items-start justify-center">
+        <!-- MOBILE -->
+        <div class="w-full max-w-sm p-4">
+          <div class="phone-3d-container relative mx-auto w-64 md:w-80 h-[520px]" style="border-radius:32px;">
+            <div style="position:absolute;inset:0;background:linear-gradient(180deg,#070707 0%, #0e0e0e 100%);border-radius:32px;padding:10px;border:6px solid rgba(255,255,255,0.03);">
+              <div style="position:relative; inset:0; width:100%; height:100%; border-radius:22px; overflow:hidden; background:#111;">
+                <div style="position:absolute; inset:0;">
+                  <img class="carousel-image active" src="photo1.jpg" alt="">
+                  <img class="carousel-image" src="photo2.jpg" alt="">
+                  <img class="carousel-image" src="photo3.jpg" alt="">
+                  <img class="carousel-image" src="photo4.jpg" alt="">
+                  <img class="carousel-image" src="photo5.jpg" alt="">
+                  <img class="carousel-image" src="photo6.jpg" alt="">
+                  <img class="carousel-image" src="photo7.jpg" alt="">
+                </div>
+
+                <div class="preview-overlay">
+                  <div class="preview-top">
+                    <div class="url-pill">eternalmemories.com/joaoemaria</div>
+                    <div class="counter-pill" id="rel-time-phone"></div>
+                  </div>
+                  <div class="preview-title">
+                    <div class="romantic-title">Nosso Amor Eterno</div>
+                    <div style="font-size:13px;color:#ffdfe9;opacity:.9;margin-top:4px;">João & Maria</div>
+                  </div>
+
+                  <div>
+                    <div class="letter" id="letter-phone">Meu amor, cada segundo ao seu lado é um pedaço do paraíso. Que nossa história continue sendo escrita com carinho, sorrisos e abraços eternos. 💖</div>
+                    <div class="music-controls mt-3">
+                      <div class="play-btn" id="phone-play">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="none" stroke="#fff" stroke-width="1.6"><path d="M5 3v18l15-9z"/></svg>
+                      </div>
+                      <div style="font-size:13px;color:#ffdfe9">Meu Abrigo — Melim</div>
+                    </div>
+                    <div class="mt-2 text-right">
+                      <div style="font-size:12px;color:#ffdfe9">Tempo juntos</div>
+                      <div id="rel-time-detailed-phone" style="font-weight:700;font-size:13px;color:#fff"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <p class="mt-6 text-gray-300 font-semibold">Versão Mobile</p>
+        </div>
+
+        <!-- DESKTOP -->
+        <div class="w-full max-w-2xl p-4">
+          <div class="laptop-3d-container mx-auto shadow-2xl" style="max-width:920px;">
+            <div style="background:linear-gradient(180deg,#070707 0%, #0e0e0e 100%); padding:10px; border-radius:14px;">
+              <div style="position:relative; height:360px; border-radius:8px; overflow:hidden; background:#111;">
+                <img class="carousel-image active" src="photo8.jpg" alt="">
+                <img class="carousel-image" src="photo9.jpg" alt="">
+                <img class="carousel-image" src="photo10.jpg" alt="">
+                <img class="carousel-image" src="photo11.jpg" alt="">
+                <img class="carousel-image" src="photo12.jpg" alt="">
+                <img class="carousel-image" src="photo13.jpg" alt="">
+                <img class="carousel-image" src="photo14.jpg" alt="">
+
+                <div class="preview-overlay">
+                  <div class="preview-top">
+                    <div class="url-pill">eternalmemories.com/joaoemaria</div>
+                    <div class="counter-pill" id="rel-time-laptop"></div>
+                  </div>
+                  <div class="preview-title">
+                    <div class="romantic-title">Nosso Amor Eterno</div>
+                    <div style="font-size:14px;color:#ffdfe9;opacity:.95;margin-top:6px;">João & Maria</div>
+                  </div>
+
+                  <div style="display:flex;gap:16px;align-items:flex-end;">
+                    <div class="letter flex-1" id="letter-laptop">Amar você é viver em um sonho do qual nunca quero acordar. Que cada dia nosso seja mais doce e eterno. 💞</div>
+                    <div style="width:240px;display:flex;flex-direction:column;align-items:flex-end;">
+                      <div class="music-controls">
+                        <div class="play-btn" id="laptop-play">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="none" stroke="#fff" stroke-width="1.6"><path d="M5 3v18l15-9z"/></svg>
+                        </div>
+                        <div style="font-size:13px;color:#ffdfe9;margin-left:6px;">Meu Abrigo — Melim</div>
+                      </div>
+                      <div style="text-align:right;margin-top:6px;">
+                        <div style="font-size:12px;color:#ffdfe9">Tempo juntos</div>
+                        <div id="rel-time-detailed-laptop" style="font-weight:700;font-size:14px;color:#fff"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div style="height:16px;background:#171717;border-radius:0 0 10px 10px;margin-top:-6px;"></div>
+          </div>
+          <p class="mt-6 text-gray-300 font-semibold">Versão Desktop</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Planos Atualizados -->
+    <section class="max-w-6xl mx-auto px-6 mb-16 grid md:grid-cols-2 gap-8">
+
+      <!-- Plano Clássico -->
+      <div class="bg-[#111] rounded-2xl p-8 shadow-lg relative text-center border-2 border-rose-400">
+        <h3 class="text-2xl font-extrabold text-rose-400 mb-2">Plano Clássico</h3>
+        <p class="text-gray-300 mb-2 font-semibold">Duração de 1 Semana</p>
+        <p class="text-3xl font-extrabold mb-1">
+          <span class="line-through text-gray-500 text-lg">R$ 39,99</span> R$ 19,99
+        </p>
+        <p class="text-sm text-rose-400 mb-4">Promoção válida por tempo limitado!</p>
+        <p class="text-sm text-gray-300 mb-2"><span id="countdown-classic">3d 3h 26m 22s restantes</span></p>
+        <ul class="text-gray-300 text-left mb-4 list-disc list-inside">
+          <li>Link Único (sem QR Code)</li>
+          <li>Até 7 fotos para contar toda a história</li>
+          <li>Música de fundo</li>
+           <li>Chuva de emojis</li>
+         <li>Cronômetro de tempo de relacionamento</li>
+        </ul>
+        <a href="questionario.html" class="inline-block px-6 py-3 bg-rose-600 hover:bg-rose-500 text-white rounded-full font-semibold transition">Escolher Plano Clássico</a>
+      </div>
+
+      <!-- Plano Premium -->
+      <div class="bg-[#111] rounded-2xl p-8 shadow-lg relative text-center border-2 border-yellow-400">
+        <div class="absolute -top-4 right-4 bg-yellow-400 text-black px-3 py-1 rounded-full text-xs font-bold">MAIS POPULAR</div>
+        <h3 class="text-2xl font-extrabold text-rose-400 mb-2">Plano Premium</h3>
+        <p class="text-gray-300 mb-2 font-semibold">Duração Permanente</p>
+        <p class="text-3xl font-extrabold mb-1">
+          <span class="line-through text-gray-500 text-lg">R$ 54,99</span> R$ 34,99
+        </p>
+        <p class="text-sm text-rose-400 mb-4">Promoção válida por tempo limitado!</p>
+        <p class="text-sm text-gray-300 mb-2"><span id="countdown-premium">3d 3h 26m 22s restantes</span></p>
+        <ul class="text-gray-300 text-left mb-4 list-disc list-inside">
+          <li>Sua memória NUNCA EXPIRA</li>
+          <li>Link Único + QR Code</li>
+          <li>Até 7 fotos para contar toda a história</li>
+          <li>Música de fundo</li>
+          <li>Chuva de emojis</li>
+          <li>Cronômetro de tempo de relacionamento</li>
+        </ul>
+        <a href="questionario.html" class="inline-block px-6 py-3 bg-rose-600 hover:bg-rose-500 text-white rounded-full font-semibold transition">Escolher Plano Premium</a>
+      </div>
+
+    </section>
+
+  </main>
+
+  <footer class="text-center text-gray-400 py-8">© 2025 Eternal Memories — Prévia Romântica de João & Maria</footer>
+
+  <!-- Scripts -->
+  <script>
+    const startDate = new Date('2020-06-20T18:30:00');
+    const audio = new Audio('meu-abrigo.mp3');
+    let isPlaying = false;
+
+    function togglePlay() {
+      if (isPlaying) { audio.pause(); }
+      else { audio.play(); }
+      isPlaying = !isPlaying;
+    }
+
+    document.getElementById('phone-play').onclick = togglePlay;
+    document.getElementById('laptop-play').onclick = togglePlay;
+
+    // Cronômetro detalhado (anos, meses, dias, horas, minutos, segundos)
+    function updateTime() {
+      const now = new Date();
+      let diff = now - startDate;
+
+      const totalSeconds = Math.floor(diff / 1000);
+      const years = Math.floor(totalSeconds / (365 * 24 * 60 * 60));
+      const months = Math.floor((totalSeconds % (365 * 24 * 60 * 60)) / (30 * 24 * 60 * 60));
+      const days = Math.floor((totalSeconds % (30 * 24 * 60 * 60)) / (24 * 60 * 60));
+      const hours = Math.floor((totalSeconds % (24 * 60 * 60)) / (60 * 60));
+      const minutes = Math.floor((totalSeconds % (60 * 60)) / 60);
+      const seconds = totalSeconds % 60;
+
+      const fullTime = `${years}A ${months}M ${days}D ${hours}h`;
+      const detailed = `${years} anos, ${months} meses, ${days} dias, ${hours}h ${minutes}m ${seconds}s`;
+
+      document.getElementById('rel-time-phone').textContent = fullTime;
+      document.getElementById('rel-time-laptop').textContent = fullTime;
+      document.getElementById('rel-time-detailed-phone').textContent = detailed;
+      document.getElementById('rel-time-detailed-laptop').textContent = detailed;
+    }
+
+    setInterval(updateTime, 1000);
+    updateTime();
+
+    // Carrossel
+    function initCarousel(containerSelector) {
+      const images = document.querySelectorAll(containerSelector + ' .carousel-image');
+      let idx = 0;
+      setInterval(() => {
+        images[idx].classList.remove('active');
+        idx = (idx + 1) % images.length;
+        images[idx].classList.add('active');
+      }, 3500);
+    }
+
+    initCarousel('.phone-3d-container');
+    initCarousel('.laptop-3d-container');
+
+    // Contador de promoções (recomeça toda segunda-feira)
+    function getNextMonday() {
+      const now = new Date();
+      const day = now.getDay();
+      const diff = (8 - day) % 7;
+      const nextMonday = new Date(now.getFullYear(), now.getMonth(), now.getDate() + diff);
+      nextMonday.setHours(0,0,0,0);
+      return nextMonday;
+    }
+
+    function updateCountdown(id) {
+      const target = getNextMonday();
+      const now = new Date();
+      let diff = target - now;
+      if(diff < 0) diff += 7*24*60*60*1000;
+
+      const days = Math.floor(diff / (1000*60*60*24));
+      const hours = Math.floor((diff % (1000*60*60*24)) / (1000*60*60));
+      const minutes = Math.floor((diff % (1000*60*60)) / (1000*60));
+      const seconds = Math.floor((diff % (1000*60)) / 1000);
+
+      document.getElementById(id).textContent = `${days}d ${hours}h ${minutes}m ${seconds}s restantes`;
+    }
+
+    setInterval(()=>{updateCountdown('countdown-classic'); updateCountdown('countdown-premium');},1000);
+    updateCountdown('countdown-classic'); 
+    updateCountdown('countdown-premium');
+  </script>
+</body>
+</html>

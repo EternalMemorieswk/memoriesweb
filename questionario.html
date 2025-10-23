@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head><!-- === UPLOADCARE === -->
+<script src="https://ucarecdn.com/libs/widget/3.x/uploadcare.full.min.js"></script>
+<script>
+  UPLOADCARE_PUBLIC_KEY = "f83de4b596c19a6515bb"; // sua chave pública Uploadcare
+</script>
+
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Questionário — Eternal Memories</title>
+<script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+<style>
+  :root{
+    --bg:#000;
+    --card:#0f1113;
+    --muted:#cfcfcf;
+    --accent1:#f472b6;
+    --accent2:#f9a8d4;
+  }
+  body{font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial;background:var(--bg);color:#fff;margin:0;padding:18px;}
+  .container{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 420px;gap:20px;}
+  @media(max-width:920px){ .container{grid-template-columns:1fr;} }
+  h1{font-weight:800;background-image:linear-gradient(90deg,var(--accent1),var(--accent2));-webkit-background-clip:text;color:transparent;font-size:1.6rem;margin:0 0 8px;}
+  .card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:14px;border-radius:12px;border:1px solid rgba(255,255,255,0.03);}
+  form {display:grid;grid-template-columns:repeat(2,1fr);gap:10px;}
+  @media(max-width:640px){ form{grid-template-columns:1fr;} }
+  label{display:block;font-size:12px;color:var(--muted);margin-bottom:6px;}
+  input[type="text"], input[type="email"], input[type="date"], textarea, select {
+    width:100%; padding:8px 10px; border-radius:10px; background:#0b0c0d; border:1px solid rgba(255,255,255,0.04); color:#fff;
+    font-size:14px; box-sizing:border-box;
+  }
+  textarea{min-height:90px; resize:vertical;}
+  .full {grid-column:1 / -1;}
+  .hint{font-size:12px;color:#a9a9a9;margin-top:4px;}
+  .finalize-btn{display:inline-block;padding:10px 14px;border-radius:12px;background:linear-gradient(90deg,var(--accent1),var(--accent2));color:#fff;font-weight:700;text-align:center;border:none;cursor:pointer}
+  .finalize-btn[disabled]{opacity:.6;cursor:not-allowed}
+  .preview-wrap{position:relative;}
+  .phone-3d{width:100%;max-width:380px;margin:0 auto;border-radius:28px;overflow:hidden;background:linear-gradient(180deg,#070707,#0e0e0e);padding:12px;border:6px solid rgba(255,255,255,0.03)}
+  .phone-inner{position:relative;width:100%;height:560px;border-radius:18px;overflow:hidden;background:#111;}
+  .carousel-image{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .9s ease-in-out;}
+  .carousel-image.active{opacity:1;}
+  .hearts{position:absolute;inset:0;pointer-events:none;z-index:12;overflow:hidden}
+  .heart{position:absolute;opacity:.95;animation:floatUp linear infinite;color:#ff6b9a;transform:translateY(0)}
+  @keyframes floatUp{0%{transform:translateY(100%) scale(.8);opacity:0;}10%{opacity:1}100%{transform:translateY(-150%) scale(1.2);opacity:0}}
+  .overlay{position:absolute;inset:0;z-index:20;display:flex;flex-direction:column;justify-content:space-between;padding:12px;gap:8px}
+  .top-row{display:flex;justify-content:space-between;align-items:center}
+  .url-pill{background:rgba(255,255,255,0.05);padding:6px 10px;border-radius:999px;font-size:12px;color:#cfcfcf}
+  .counter-pill{background:rgba(255,255,255,0.05);padding:6px 10px;border-radius:12px;font-weight:700;font-size:12px}
+  .title-preview{font-weight:800;font-size:18px;color:#ffdfe9;text-shadow:0 6px 18px rgba(255,105,155,0.12)}
+  .names-preview{font-size:13px;color:#ffdfe9;opacity:.9}
+  .letter{background:rgba(0,0,0,0.35);backdrop-filter:blur(4px);padding:8px;border-radius:10px;font-size:13px;line-height:1.25;max-height:120px;overflow:auto;color:#f7ecf1;box-shadow:0 6px 20px rgba(0,0,0,0.6)}
+  .music-controls{display:flex;align-items:center;gap:8px;margin-top:8px}
+  .play-btn{width:36px;height:36px;border-radius:10px;background:rgba(255,255,255,0.05);display:flex;align-items:center;justify-content:center;cursor:pointer}
+  .music-title-min{color:#ffdfe9;font-weight:600;font-size:13px;margin-left:8px;max-width:200px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .small{font-size:12px;color:#aaa}
+  .row-actions{display:flex;gap:8px;align-items:center}
+  .muted{color:#a9a9a9;font-size:13px}
+</style>
+</head>
+<body>
+  <div class="container">
+    <div>
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
+        <h1>Crie Sua Memória</h1>
+        <a href="index.html" class="muted" style="background:#ff4d6d;padding:8px 12px;border-radius:10px;color:#fff;text-decoration:none">Home</a>
+      </div>
+
+      <div class="card">
+        <form id="memory-form" autocomplete="off">
+          <div>
+            <label>Nome completo</label>
+            <input id="input-nome" type="text" placeholder="Ex: João da Silva" />
+          </div>
+          <div>
+            <label>E-mail</label>
+            <input id="input-email" type="email" placeholder="seu@email.com" />
+          </div>
+          <div>
+            <label>Confirme o e-mail</label>
+            <input id="input-email2" type="email" placeholder="Repita seu e-mail" />
+          </div>
+          <div>
+            <label>WhatsApp</label>
+            <input id="input-whatsapp" type="text" placeholder="Ex: +55 11 99999-9999" />
+          </div>
+          <div>
+            <label>URL personalizada</label>
+            <input id="input-url" type="text" placeholder="joaoemaria" />
+          </div>
+          <div>
+            <label>Título da Memória</label>
+            <input id="input-title" type="text" placeholder="Nosso Amor Eterno" />
+          </div>
+          <div>
+            <label>Nomes do casal</label>
+            <input id="input-names" type="text" placeholder="João & Maria" />
+          </div>
+          <div>
+            <label>Data de início</label>
+            <input id="input-date" type="date" />
+          </div>
+          <div class="full">
+            <label>Carta / Declaração</label>
+            <textarea id="input-letter" placeholder="Meu amor, cada segundo é mágico 💖"></textarea>
+          </div>
+          <div>
+            <label>Música (YouTube)</label>
+            <input id="youtube-url" type="text" placeholder="Cole a URL do YouTube..." />
+            <div class="hint">Cole a URL (ex: https://youtu.be/ID)</div>
+          </div>
+          <div>
+            <label>Escolha seus Emojis</label>
+            <input id="input-emojis" type="text" placeholder="💖, 💞, 😍" />
+            <div class="hint">Separe por vírgula.</div>
+          </div>
+          <div>
+  <label>Upload de Fotos (máx 7)</label>
+  <input
+    type="hidden"
+    role="uploadcare-uploader"
+    id="input-images"
+    data-public-key="f83de4b596c19a6515bb"
+    data-images-only="true"
+    data-multiple="true"
+    data-multiple-max="7"
+    data-preview-step="true"
+  />
+  <div class="hint">Máximo 7 imagens (enviadas automaticamente para a nuvem).</div>
+</div>
+          <div>
+            <label>Escolha o plano</label>
+            <select id="input-plan">
+              <option value="classico">Clássico — R$19,99</option>
+              <option value="premium">Premium — R$34,99</option>
+            </select>
+            <div class="hint" style="margin-top:6px">
+              <a href="https://pag.ae/8194hjfKw" target="_blank" style="color:#ff91c2;text-decoration:none">💖 Pagar Clássico</a> |
+              <a href="https://pag.ae/8194gXZxL" target="_blank" style="color:#ff91c2;text-decoration:none">💎 Pagar Premium</a>
+            </div>
+          </div>
+
+          <div class="full" style="display:flex;justify-content:space-between;align-items:center;margin-top:8px;">
+            <div><div class="muted">Os dados serão enviados ao e-mail da Eternal Memories e você será redirecionado ao pagamento.</div></div>
+            <div class="row-actions">
+              <button id="finalize-btn" type="button" class="finalize-btn">Finalizar Memória</button>
+            </div>
+          </div>
+        </form>
+      </div>
+
+      <div style="margin-top:12px;color:#a9a9a9;font-size:13px">
+        <strong>Importante:</strong> o HTML final será enviado para <em>eternalmemorieswk@gmail.com</em>.
+      </div>
+    </div>
+
+    <!-- PREVIEW -->
+    <div>
+      <div class="card preview-wrap">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+          <div><strong class="muted">Pré-visualização</strong></div>
+          <div class="small">Atualiza em tempo real</div>
+        </div>
+        <div class="phone-3d">
+          <div class="phone-inner" id="preview-phone">
+            <div id="phone-carousel" style="position:absolute;inset:0;"></div>
+            <div class="hearts" id="emoji-container"></div>
+            <div class="overlay">
+              <div class="top-row">
+                <div class="url-pill" id="preview-url">eternalmemories.com/seucasal</div>
+                <div class="counter-pill" id="rel-time-phone">0A 0M 0D 0h</div>
+              </div>
+              <div style="text-align:center;">
+                <div class="title-preview" id="preview-title">Nosso Amor Eterno</div>
+                <div class="names-preview" id="preview-names">João & Maria</div>
+              </div>
+              <div>
+                <div class="letter" id="letter-phone">Meu amor, cada segundo é mágico 💖</div>
+
+                <div class="music-controls" id="music-controls" style="display:none;">
+                  <div class="play-btn" id="play-music">▶</div>
+                  <div class="music-title-min" id="music-title">Nome da música</div>
+                </div>
+              </div>
+              <div id="rel-time-detailed-phone" style="color:#ffdfe9;font-size:12px;margin-top:6px"></div>
+            </div>
+          </div>
+        </div>
+        <div style="margin-top:10px;text-align:center;color:#a9a9a9;font-size:13px;">Versão Mobile — prévia da memória final</div>
+      </div>
+    </div>
+  </div>
+
+<script>
+/* === CONFIG EmailJS === */
+(function(){ emailjs.init("z_oQwPv4WdFq4QLtO"); })();
+
+// Payment links
+const paymentLinks = {
+  classico: "https://pag.ae/8194hjfKw", // R$19,99
+  premium: "https://pag.ae/8194gXZxL"   // R$34,99
+};
+
+/* state */
+let startDate = new Date();
+let imageDataURLs = []; // base64 for final HTML
+let previewObjectURLs = []; // for preview
+let carouselInterval = null;
+
+/* helpers */
+const $ = id => document.getElementById(id);
+
+function readFileAsDataURL(file){
+  return new Promise((res,rej)=>{
+    const fr = new FileReader();
+    fr.onload = ()=>res(fr.result);
+    fr.onerror = ()=>rej(fr.error);
+    fr.readAsDataURL(file);
+  });
+}
+
+/* PREVIEW updates */
+const inputs = {
+  url: $('input-url'),
+  title: $('input-title'),
+  names: $('input-names'),
+  date: $('input-date'),
+  letter: $('input-letter'),
+  emojis: $('input-emojis'),
+  youtube: $('youtube-url'),
+  images: $('input-images'),
+  plan: $('input-plan')
+};
+const preview = {
+  url: $('preview-url'),
+  title: $('preview-title'),
+  names: $('preview-names'),
+  letter: $('letter-phone'),
+  emojis: $('emoji-container'),
+  carousel: $('phone-carousel'),
+  controls: $('music-controls'),
+  play: $('play-music'),
+  musicTitle: $('music-title'),
+  relTimePhone: $('rel-time-phone'),
+  relTimeDetailed: $('rel-time-detailed-phone')
+};
+
+function renderEmojisPreview(list){
+  preview.emojis.innerHTML = '';
+  const arr = (list && list.length) ? list : ['💖','💞','😍','🥰','💕','💓','💗','💘'];
+  const count = Math.max(arr.length*3, 12);
+  for(let i=0;i<count;i++){
+    const e = arr[Math.floor(Math.random()*arr.length)];
+    const span = document.createElement('div');
+    span.className = 'heart';
+    span.textContent = e;
+    span.style.left = `${Math.random()*90}%`;
+    span.style.top = `${40 + Math.random()*45}%`;
+    span.style.fontSize = `${12 + Math.random()*10}px`;
+    span.style.animationDuration = `${3 + Math.random()*3}s`;
+    preview.emojis.appendChild(span);
+  }
+}
+
+/* time update (cronômetro) */
+function updateTime(){
+  const now = new Date();
+  const diff = now - startDate;
+  if(isNaN(diff)){ preview.relTimePhone.textContent = '0A 0M 0D 0h'; preview.relTimeDetailed.textContent = ''; return; }
+  const totalSeconds = Math.floor(diff/1000);
+  const years = Math.floor(totalSeconds/(365*24*60*60));
+  const months = Math.floor((totalSeconds%(365*24*60*60))/(30*24*60*60));
+  const days = Math.floor((totalSeconds%(30*24*60*60))/(24*60*60));
+  const hours = Math.floor((totalSeconds%(24*60*60))/(60*60));
+  const minutes = Math.floor((totalSeconds%(60*60))/60);
+  const seconds = totalSeconds % 60;
+  preview.relTimePhone.textContent = `${years}A ${months}M ${days}D ${hours}h`;
+  preview.relTimeDetailed.textContent = `${years} anos, ${months} meses, ${days} dias, ${hours}h ${minutes}m ${seconds}s`;
+}
+setInterval(updateTime,1000);
+
+/* bind input events */
+Object.values(inputs).forEach(el=>{
+  el.addEventListener('input', updatePreview);
+});
+$('input-emojis').addEventListener('input', ()=> {
+  const arr = $('input-emojis').value.split(',').map(s=>s.trim()).filter(Boolean);
+  renderEmojisPreview(arr.length ? arr : null);
+});
+$('input-date').addEventListener('input', ()=>{
+  const v = $('input-date').value;
+  if(v) startDate = new Date(v + 'T00:00:00');
+  updateTime();
+});
+
+/* carousel auto */
+function startCarouselPreview(){
+  clearInterval(carouselInterval);
+  const imgs = preview.carousel.querySelectorAll('.carousel-image');
+  if(imgs.length <= 1) return;
+  let idx = 0;
+  carouselInterval = setInterval(()=>{
+    imgs[idx].classList.remove('active');
+    idx = (idx + 1) % imgs.length;
+    imgs[idx].classList.add('active');
+  }, 3500);
+}
+
+/* update preview (title, names, letter, music title) */
+async function updatePreview(){
+  preview.url.textContent = "eternalmemories.com/" + (inputs.url.value || 'seucasal');
+  preview.title.textContent = inputs.title.value || 'Nosso Amor Eterno';
+  preview.names.textContent = inputs.names.value || 'Casal Inesquecível';
+  preview.letter.textContent = inputs.letter.value || 'Escreva uma carta linda 💖';
+
+  // emojis handled separately (we rendered them on input)
+  // music: try extract id and fetch title via noembed
+  const youtubeUrl = inputs.youtube.value.trim();
+  if(youtubeUrl){
+    const match = youtubeUrl.match(/(?:youtube\.com\/.*v=|youtube\.com\/embed\/|youtu\.be\/)([a-zA-Z0-9_-]{11})/);
+    if(match){
+      const id = match[1];
+      preview.controls.style.display = 'flex';
+      // fetch title (noembed)
+      try{
+        const res = await fetch(`https://noembed.com/embed?url=https://www.youtube.com/watch?v=${id}`);
+        if(res.ok){
+          const data = await res.json();
+          preview.musicTitle.textContent = data.title || 'Minha música';
+        } else {
+          preview.musicTitle.textContent = 'Minha música';
+        }
+      } catch(err){
+        preview.musicTitle.textContent = 'Minha música';
+      }
+    } else {
+      preview.controls.style.display = 'none';
+      preview.musicTitle.textContent = '';
+    }
+  } else {
+    preview.controls.style.display = 'none';
+    preview.musicTitle.textContent = '';
+  }
+
+  // if images were added earlier they are already shown
+}
+
+/* play button opens youtube */
+preview.play.addEventListener('click', ()=>{
+  const url = inputs.youtube.value.trim();
+  if(url) window.open(url, '_blank');
+});
+
+/* initial render */
+renderEmojisPreview();
+updatePreview();
+
+/* build final HTML with embedded images (base64) */
+function escapeHtml(s){ return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
+function buildFinalHTML(data){
+  const imagesHTML = (data.images && data.images.length) ? data.images.map((src,i)=>`<img src="${src}" alt="foto${i+1}" style="width:100%;display:block;margin-bottom:8px;border-radius:10px;">`).join('\n') : '';
+  const emojisInline = (data.emojis || '').split(',').map(s=>s.trim()).filter(Boolean).join(' ');
+  const safeLetter = (data.letter || '').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/\n/g,'<br>');
+  const musicEmbed = (()=> {
+    if(!data.musicUrl) return '';
+    const match = data.musicUrl.match(/(?:youtube\.com\/.*v=|youtube\.com\/embed\/|youtu\.be\/)([a-zA-Z0-9_-]{11})/);
+    if(match){ const id = match[1]; return `<iframe width="100%" height="200" src="https://www.youtube.com/embed/${id}" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen style="border-radius:12px;"></iframe>`; }
+    return `<p>Link da música: <a href="${escapeHtml(data.musicUrl)}" target="_blank">${escapeHtml(data.musicUrl)}</a></p>`;
+  })();
+
+  return `<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>${escapeHtml(data.title || 'Memória')}</title>
+<style>
+body{background:#000;color:#fff;font-family:Inter, system-ui, -apple-system, 'Segoe UI', Roboto, Arial;margin:0;padding:20px;}
+.wrap{max-width:980px;margin:0 auto}
+.hero{background:linear-gradient(180deg,#070707,#0e0e0e);padding:18px;border-radius:18px;border:6px solid rgba(255,255,255,0.03);position:relative;overflow:hidden}
+.title{font-weight:800;font-size:28px;color:#ffdfe9;margin:0}
+.names{color:#ffdfe9;margin-top:6px}
+.meta{margin-top:8px;color:#cfcfcf;font-size:14px}
+.letter{background:rgba(0,0,0,0.35);padding:12px;border-radius:12px;margin-top:12px;color:#f7ecf1}
+.images{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:10px;margin-top:18px}
+img{max-width:100%;border-radius:12px;display:block}
+.footer{margin-top:18px;color:#cfcfcf;font-size:13px}
+a{color:#ff9ab6}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="hero">
+    <div class="title">${escapeHtml(data.title || '')}</div>
+    <div class="names">${escapeHtml(data.names || '')}</div>
+    <div class="meta">URL: eternalmemories.com/${escapeHtml(data.url || '')} • Início: ${escapeHtml(data.date || '')} • Plano: ${escapeHtml(data.plan || '')}</div>
+    <div class="letter">${safeLetter}</div>
+    ${musicEmbed}
+    <div class="images">${imagesHTML}</div>
+    <div style="margin-top:12px;color:#ffdfe9">Emojis: ${escapeHtml(emojisInline)}</div>
+  </div>
+  <div class="footer">
+    <p>Gerado para: ${escapeHtml(data.nome || '')} — WhatsApp: ${escapeHtml(data.whatsapp || '')} — E-mail: ${escapeHtml(data.email || '')}</p>
+    <p>Observação: hospede este arquivo no seu domínio e envie o link para o cliente.</p>
+  </div>
+</div>
+</body>
+</html>`;
+}
+
+/* finalize: send email (to your template) then open payment link */
+$('finalize-btn').addEventListener('click', async ()=>{
+  const nome = $('input-nome').value.trim();
+  const email = $('input-email').value.trim();
+  const email2 = $('input-email2').value.trim();
+  const whatsapp = $('input-whatsapp').value.trim();
+
+  if(!nome || !email || !email2 || email !== email2 || !whatsapp){
+    alert('Por favor, preencha corretamente nome, e-mail e WhatsApp.');
+    return;
+  }
+
+  const btn = $('finalize-btn');
+  btn.disabled = true;
+  btn.textContent = 'Enviando...';
+
+  // gather data
+  const data = {
+    nome,
+    email,
+    whatsapp,
+    url: inputs.url.value || 'seucasal',
+    title: inputs.title.value || 'Nosso Amor Eterno',
+    names: inputs.names.value || 'João & Maria',
+    date: inputs.date.value || '',
+    letter: inputs.letter.value || '',
+    musicUrl: inputs.youtube.value || '',
+    emojis: inputs.emojis.value || '',
+    plan: inputs.plan.value || 'classico',
+   images: uploadedImageLinks // URLs do Uploadcare
+
+  };
+
+  const resumo = `
+    <h2 style="color:#ff66a6">Nova Memória Recebida 💌</h2>
+    <p><b>Nome:</b> ${escapeHtml(data.nome)}</p>
+    <p><b>Email:</b> ${escapeHtml(data.email)}</p>
+    <p><b>WhatsApp:</b> ${escapeHtml(data.whatsapp)}</p>
+    <p><b>Plano:</b> ${escapeHtml(data.plan)}</p>
+    <p><b>URL:</b> eternalmemories.com/${escapeHtml(data.url)}</p>
+    <hr>
+    <h3>${escapeHtml(data.title)}</h3>
+    <p><b>Casal:</b> ${escapeHtml(data.names)}</p>
+    <p><b>Data de início:</b> ${escapeHtml(data.date)}</p>
+    <p><b>Carta:</b> ${escapeHtml(data.letter)}</p>
+    <p><b>Música:</b> ${escapeHtml(data.musicUrl)}</p>
+    <p><b>Emojis:</b> ${escapeHtml(data.emojis)}</p>
+    <p><b>Imagens enviadas:</b> ${data.images.length}</p>
+  `;
+
+  // build final HTML (embedded images)
+  const finalHTML = buildFinalHTML(data);
+
+  // prepare template params (your template uses these variables)
+  const templateParams = {
+    name: data.nome,
+    email: data.email,
+    whatsapp: data.whatsapp,
+    url: data.url,
+    title: data.title,
+    names: data.names,
+    date: data.date,
+    letter: data.letter,
+    musicUrl: data.musicUrl,
+    emojis: data.emojis,
+    plan: data.plan,
+    imageCount: data.images.length,
+    resumo: resumo,
+    message: finalHTML
+  };
+
+  try {
+    await emailjs.send('service_b2w1gwz','template_37v0qct', templateParams);
+    alert('Memória enviada com sucesso! Você será redirecionado para o pagamento.');
+    // open payment link based on plan in new tab
+    const link = data.plan === 'premium' ? paymentLinks.premium : paymentLinks.classico;
+    window.open(link, '_blank');
+    // store finalHTML locally
+    localStorage.setItem('lastMemoryHTML', finalHTML);
+    // reset
+    document.getElementById('memory-form').reset();
+    preview.carousel.innerHTML = '';
+    preview.emojis.innerHTML = '';
+    imageDataURLs = [];
+    previewObjectURLs.forEach(u=>URL.revokeObjectURL(u));
+    previewObjectURLs = [];
+  } catch(err){
+    console.error(err);
+    alert('Erro ao enviar. Verifique a configuração do EmailJS ou sua conexão.');
+  } finally {
+    btn.disabled = false;
+    btn.textContent = 'Finalizar Memória';
+  }
+});
+</script>
+<!-- === UPLOADCARE INTEGRAÇÃO FUNCIONAL COM PRÉVIA === -->
+<script>
+const uploadWidget = uploadcare.Widget('[role=uploadcare-uploader]');
+let uploadedImageLinks = [];
+
+uploadWidget.onChange(function(fileGroup) {
+  if (!fileGroup) return;
+
+  // `fileGroup` pode ser um grupo ou um único arquivo
+  fileGroup.promise().then(async (group) => {
+    if (group.files()) {
+      // resolve todas as promessas dos arquivos do grupo
+      const results = await Promise.all(group.files().map(f => f.promise()));
+      uploadedImageLinks = results.map(r => r.cdnUrl);
+      atualizarPreviewImagens(uploadedImageLinks);
+    } else if (group.cdnUrl) {
+      // caso seja um único arquivo
+      uploadedImageLinks = [group.cdnUrl];
+      atualizarPreviewImagens(uploadedImageLinks);
+    }
+  });
+});
+
+function atualizarPreviewImagens(lista) {
+  console.log("📸 Fotos enviadas:", lista);
+  const carousel = document.getElementById('phone-carousel');
+  carousel.innerHTML = '';
+  if (!lista.length) return;
+
+  lista.forEach((url, i) => {
+    const img = document.createElement('img');
+    img.className = 'carousel-image' + (i === 0 ? ' active' : '');
+    img.src = url;
+    carousel.appendChild(img);
+  });
+
+  iniciarCarrosselPreview();
+}
+
+function iniciarCarrosselPreview() {
+  clearInterval(window.carouselInterval);
+  const imgs = document.querySelectorAll('#phone-carousel .carousel-image');
+  if (imgs.length <= 1) return;
+
+  let idx = 0;
+  window.carouselInterval = setInterval(() => {
+    imgs[idx].classList.remove('active');
+    idx = (idx + 1) % imgs.length;
+    imgs[idx].classList.add('active');
+  }, 3500);
+}
+</script>
+</body>
+</html>
+
